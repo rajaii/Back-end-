@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const userDb = require('***nameofuserHelpersFileGoesHere***')
+const userDb = require('./userHelpers.js');
 
 
 const router = express.Router();
@@ -37,6 +37,8 @@ router.post('/login', (req, res) => {
       res.status(500).json(err);
     })
   });
+
+  //after user logs in react would call a get on all the users event info
   
   function generateToken(user) {
     const payload = {
