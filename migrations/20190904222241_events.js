@@ -2,7 +2,9 @@
 exports.up = function(knex) {
   return knex.schema.createTable('events', tbl => {
       tbl.increments('id');
-      //continue here
+      users.string("description").notNullable()
+      users.integer('date/time')
+      users.integer('budget').notNullable();
   })
 
   .createTable('users', users => {
@@ -13,8 +15,23 @@ exports.up = function(knex) {
       .notNullable()
       .unique();
     users.string('password', 255).notNullable();
-  });
+   
+  })
 
+  .createTable("vendors", tbl => {
+    tbl.increments("id")
+    vendors.string('name').notNullable()
+    vendors.string('email')
+    vendors.string('phone number').notNullable()
+
+  })
+  
+  .createTable("todo list", tbl => {
+    tbl.increments('id')
+    todolist.string("ToDO item").notNullable()
+    todolist.boolean("completed");
+
+  });
 };
 
 exports.down = function(knex) {
