@@ -1,8 +1,9 @@
-
+//made little tweaks in your code to make them run ie camelcasing those that had spaces, 
+//I think putting strings as property names in the object would allow spaces but I'm not sure will ask mon
 exports.up = function(knex) {
   return knex.schema.createTable('events', tbl => {
       tbl.increments('id');
-      tbl.string('event name', 128)
+      tbl.string('eventName', 128)
         .notNullable()
         .unique();
       tbl.string('description');
@@ -28,8 +29,21 @@ exports.up = function(knex) {
     tbl.string('password')
       .notNullable();
   })
+  .createTable("vendors", tbl => {
+    tbl.increments("id")
+    tbl.string('name').notNullable()
+    tbl.string('email')
+    tbl.string('phoneNumber').notNullable()
+
+  })
+  .createTable("todoList", tbl => {
+    tbl.increments('id')
+    tbl.string("todoItem").notNullable()
+    tbl.boolean("completed").notNullable().defaultTo("false");
+
+  });
 };
-//company, role, email, password, username
+
 exports.down = function(knex) {
   return knex.schema.dropTableIfExists('events');  //continue after this to delete all tables properly
 };
