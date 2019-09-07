@@ -1,6 +1,6 @@
 const express = require('express');
 const Events = require('./eventsModel');
-const rouuter = express.Router();
+const router = require('express').Router();
 
 
 router.get('/', async (req,res) => {
@@ -11,3 +11,5 @@ router.get('/', async (req,res) => {
         res.status(500).json({message: "Error retrieving events"})
     }
 })
+
+module.exports = router;
