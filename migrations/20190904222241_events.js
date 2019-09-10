@@ -1,22 +1,22 @@
 
-exports.up = function(knex) {
-  return knex.schema.createTable('events', tbl => {
-      tbl.increments('id');
-      tbl.string("description").notNullable()
-      tbl.integer('date/time')
-      tbl.integer('budget').notNullable();
-  })
-
-  .createTable('users', tbl => {
-    tbl.increments();
+exports.up = function(knex ) {
+  return knex.schema.createTable('users', tbl => {
+    tbl.increments('id')
 
     tbl
       .string('username', 255)
       .notNullable()
-      .unique();
-    tbl.string('password', 255).notNullable();
+      .unique()
+    tbl.string('password', 255).notNullable()
    
   })
+
+  .createTable('events', tbl => {
+    tbl.increments('id')
+    tbl.string("description").notNullable()
+    tbl.integer('budget').notNullable()
+})
+
 
   .createTable("vendors", tbl => {
     tbl.increments("id")
@@ -29,12 +29,14 @@ exports.up = function(knex) {
   .createTable("todo list", tbl => {
     tbl.increments('id')
     tbl.string("ToDO item").notNullable()
-    tbl.boolean("completed").notNullable().defaultTo("false");
+    tbl.boolean("completed").notNullable().defaultTo("false")
 
-  });
+  })
 };
 
-exports.down = function(knex) {
-  return knex.schema.dropTableIfExists('users') ,   //continue after this to delete all tables properly
-         knex.schema.dropTableIfExists('events');
+exports.down = function(knex ) {
+  return knex.schema.dropTableIfExists('todo list')
+  .dropTableIfExists('vendors')
+  .dropTableIfExists('events')
+  .dropTableIfExists('users')   // Reverse order of which it was implemented to fall off correctly. 
 };

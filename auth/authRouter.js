@@ -1,7 +1,8 @@
 const express = require('express')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const userDb = require('./authModel');
+const userDb = require('./authModel')
+const authenticate = require('../auth/authenticate-middleware');
 
 
 const router = express.Router();
@@ -51,6 +52,14 @@ router.post('/login', (req, res) => {
   }
   return jwt.sign(payload, secret, options);
   };
+
+
+router.get("/events", authenticate, (req, res) => {
+    userDb.fetch()
+    .then(events => {
+      res.send(events)
+    }) .catch( error => res.send(error));
+});
 
 
 module.exports = router;
