@@ -1,23 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const eventDb = require('./eventHelpers.js');
-
-
+const vendorsDb = require('./vendorsHelpers.js');
 
 router.get('/', async (req, res) => {
     try {
-        const event = await eventDb.find();
-        res.status(200).json(event);
+        const vendor = await vendorsDb.find();
+        res.status(200).json(vendor);
     } 
     catch (err) {
-        res.status(500).json(err.message);
+        res.status(500).json(err);
     }
 })
 
 router.post('/', async (req, res) => {
     try {
-        const newEvent = await eventDb.insert(req.body);
-        res.status(201).json(newEvent);
+        const newVendor = await vendorDb.insert(req.body);
+        res.status(201).json(newVendor);
     } 
     catch (err) {
         res.status(500).json(err)
@@ -27,8 +25,8 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const updatedEvent = await eventDb.update(id, req.body);
-        res.status(201).json(updatedEvent);
+        const updatedVendor = await vendorsDb.update(id, req.body);
+        res.status(201).json(updatedVendor);
     } 
     catch (err) {
         res.status(500).json(err);
@@ -38,15 +36,12 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const eventGone =  await eventDb.destroy(id);
-        res.status(204).json(eventGone);
+        const vendorGone =  await vendorDb.destroy(id);
+        res.status(204).json(vendorGone);
     }
     catch (err) {
         res.status(500).json(err);
     }
 })
-
-
-
 
 module.exports = router;
