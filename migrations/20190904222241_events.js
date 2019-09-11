@@ -22,10 +22,8 @@ exports.up = function(knex ) {
     tbl.increments("id")
     tbl.string('name').notNullable()
     tbl.string('email')
-    tbl.string('phone number').notNullable()
-    .unsigned()
-    .references("id")
-    .inTable("events");
+    tbl.string('phone number').notNullable();
+    
 
   })
   
@@ -49,19 +47,37 @@ exports.up = function(knex ) {
     .references("id")
     .inTable("users");
     tbl
-    .integer("event_id")
+    .integer("events_id")
     .notNullable()
     .unsigned()
     .references("id")
     .inTable("events");
   })
+
+  .createTable("event_vendors", tbl => {
+    tbl.increments()
+    tbl
+    .integer("events_id")
+    .notNullable()
+    .unsigned()
+    .references("id")
+    .inTable("events");
+    tbl
+    .integer("vendors_id")
+    .notNullable()
+    .unsigned()
+    .references("id")
+    .inTable("vendors");
+  })
+
 };
 
 exports.down = function(knex ) {
   return knex
+  .dropTableIfExists('event_vendors')
   .dropTableIfExists('user_event')
   .dropTableIfExists('todo list')
   .dropTableIfExists('vendors')
   .dropTableIfExists('events')
-  .dropTableIfExists('users')   // Reverse order of which it was implemented to fall off correctly. 
+  .dropTableIfExists('users') ;  // Reverse order of which it was implemented to fall off correctly. 
 };
