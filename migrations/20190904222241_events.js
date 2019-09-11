@@ -7,14 +7,14 @@ exports.up = function(knex ) {
       .string('username', 255)
       .notNullable()
       .unique()
-    tbl.string('password', 255).notNullable()
+    tbl.string('password', 255).notNullable();
    
   })
 
   .createTable('events', tbl => {
     tbl.increments('id')
     tbl.string("description").notNullable()
-    tbl.integer('budget').notNullable()
+    tbl.integer('budget').notNullable();
 })
 
 
@@ -23,6 +23,9 @@ exports.up = function(knex ) {
     tbl.string('name').notNullable()
     tbl.string('email')
     tbl.string('phone number').notNullable()
+    .unsigned()
+    .references("id")
+    .inTable("events");
 
   })
   
@@ -30,12 +33,34 @@ exports.up = function(knex ) {
     tbl.increments('id')
     tbl.string("ToDO item").notNullable()
     tbl.boolean("completed").notNullable().defaultTo("false")
+    .unsigned()
+    .references("id")
+    .inTable("events");
 
+  })
+
+
+  .createTable("user_event", tbl => {
+    tbl.increments()
+    tbl
+    .integer("user_id")
+    .notNullable()
+    .unsigned()
+    .references("id")
+    .inTable("users");
+    tbl
+    .integer("event_id")
+    .notNullable()
+    .unsigned()
+    .references("id")
+    .inTable("events");
   })
 };
 
 exports.down = function(knex ) {
-  return knex.schema.dropTableIfExists('todo list')
+  return knex
+  .dropTableIfExists('user_event')
+  .dropTableIfExists('todo list')
   .dropTableIfExists('vendors')
   .dropTableIfExists('events')
   .dropTableIfExists('users')   // Reverse order of which it was implemented to fall off correctly. 
