@@ -4,11 +4,11 @@ const todoListDb = require('./todoListHelpers.js');
 
 router.get('/', async (req, res) => {
     try {
-        const todoList = await TodoListDb.find();
+        const todoList = await todoListDb.find();
         res.status(200).json(todoList);
     } 
     catch (err) {
-        res.status(500).json(err);
+        res.status(500).json(err.message);
     }
 })
 
@@ -40,7 +40,7 @@ router.delete('/:id', async (req, res) => {
         res.status(204).json(todoListGone);
     }
     catch (err) {
-        res.status(500).json(err);
+        res.status(500).json(err.message);
     }
 })
 

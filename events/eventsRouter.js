@@ -42,7 +42,7 @@ router.delete('/:id', async (req, res) => {
         res.status(204).json(eventGone);
     }
     catch (err) {
-        res.status(500).json(err);
+        res.status(500).json(err.message);
     }
 })
 

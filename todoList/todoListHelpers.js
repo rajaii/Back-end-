@@ -9,17 +9,17 @@ module.exports = {
 }
 
 function find() {
-    return db('todoList');
+    return db('todo list');
 }
 
 function insert(todoList) {
-    return db('todoList').insert(todoList);
+    return db('todo list').insert(todoList);
 }
 
 function update(id, t) {
-    return db('todoList').where({id}).update(t);
+    return db('todo list').where({id}).update(t);
 }
 
 function destroy(id) {
-    return db('todoList').where({id}).destroy();
+    return db('todo list').where({id}).del();
 }

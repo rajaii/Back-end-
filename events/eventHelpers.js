@@ -16,7 +16,8 @@ function find() {
 }
 
 function insert(event) {
-    return db('events').insert(event);
+    return db('events').insert(event)
+    db('user_event').insert
 }
 
 function update(id, e) {
@@ -24,7 +25,7 @@ function update(id, e) {
 }
 
 function destroy(id) {
-    return db('events').where({id}).destroy();
+    return db('events').where({id}).del();
 }
 
 

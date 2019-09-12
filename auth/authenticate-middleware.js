@@ -6,8 +6,9 @@ const jwt = require('jsonwebtoken');
 module.exports = (req, res, next) => {
   const tokenHeader = req.headers.authorization;
   if (tokenHeader) {
-    jwt.verify(tokenHeader, process.env.SECRET , (err, decodedToken) => {
+    jwt.verify(tokenHeader, "AliDaShizzyManizzy" , (err, decodedToken) => {
       if (err) {
+        console.log(err)
         res.status(401).json({message: "bad auth"})
       } else {
         req.decodedJwt = decodedToken;

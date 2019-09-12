@@ -14,11 +14,11 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const newVendor = await vendorDb.insert(req.body);
+        const newVendor = await vendorsDb.insert(req.body);
         res.status(201).json(newVendor);
     } 
     catch (err) {
-        res.status(500).json(err)
+        res.status(500).json(err.message)
     }
 })
 
@@ -36,11 +36,11 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const vendorGone =  await vendorDb.destroy(id);
+        const vendorGone =  await vendorsDb.destroy(id);
         res.status(204).json(vendorGone);
     }
     catch (err) {
-        res.status(500).json(err);
+        res.status(500).json(err.message);
     }
 })
 

@@ -13,7 +13,9 @@ router.post('/register', (req, res) => {
 
     userDb.create(user)
     .then(u => {
-        res.status(201).json({message: `Welcome ${u.username}`})
+      console.log(u);
+        res.status(201).json({message: `Welcome ${user.username}`})
+        
     })
     .catch(err => {
         res.status(500).json({error: err})
@@ -45,7 +47,7 @@ router.post('/login', (req, res) => {
       subject: user.id,
       username: user.username
     }
-    const secret = process.env.SECRET || "AliDaShizzyManizzy"
+    const secret =  "AliDaShizzyManizzy"
   const options = {
     expiresIn: '1h'
   }

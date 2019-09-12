@@ -23,5 +23,5 @@ function update(id, v) {
 }
 
 function destroy(id) {
-    return db('vendors').where({id}).destroy();
+    return db('vendors').where({id}).del();
 }
