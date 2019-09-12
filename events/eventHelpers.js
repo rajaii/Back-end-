@@ -16,8 +16,7 @@ function find() {
 }
 
 function insert(event) {
-    return db('events').insert(event)
-    db('user_event').insert
+    return db('events').insert(event);
 }
 
 function update(id, e) {
